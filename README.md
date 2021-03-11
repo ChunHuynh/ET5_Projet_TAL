@@ -1,8 +1,15 @@
 # Projet TAL
 
+## Notes
+Les commandes suivantes sont à exécuter à la racine du projet ```../ET5_Projet_TAL/```
 
-Les commandes suivantes sont à exécuter à la racine du projet ```../ET5_Projet_TAL/```<br>
 Les fichiers nécessaires sont passés en paramètre de la commande d'exécution du script python. Le premier paramètre est en général le fichier dont on lit les données, le deuxième le fichier résultat à créer après traitement des données du premier fichier.
+
+Certains fichiers qui excèdent 50 MB n'ont pas pu être ajoutés. Ces fichiers concernent les dossiers stanford-ner et stanford-postagger. 
+Voici les liens pour télécharger de nouveau et les remplacer:
+[Stanford POS Tagger](https://nlp.stanford.edu/software/tagger.shtml#Download)
+[Stanford NER](https://nlp.stanford.edu/software/CRF-NER.html#Download)
+
 
 ## I - Evaluation de l’analyse morpho-syntaxique
 ### 1. Utiliser le corpus annoté « pos_reference.txt.lima » pour extraire les phrases ayant servi pour produire ce corpus annoté et sauvegarder le résultat dans le fichier « pos_test.txt ».
