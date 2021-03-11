@@ -1,0 +1,26 @@
+Compound:	{<JJ.*><NN.*>}
+  (biannual/JJ powwow/NN)
+  (sunny/JJ confines/NNS)
+  (fall/JJS board/NN)
+  (corporate/JJ decision/NN)
+  (good/JJ place/NN)
+
+Compound: 	{<NN.*><NN.*>}
+  (manufacturing/NN titans/NNS)
+  (resort/NN towns/NNS)
+  (Boca/NNP Raton/NNP)
+  (Hot/NNP Springs/NNP)
+  (National/NNP Association/NNP)
+  (Hoosier/NNP capital/NN)
+  (board/NN meeting/NN)
+  (rock/NN stars/NNS)
+  (factory/NN owners/NNS)
+  (decision/NN makers/NNS)
+  (Rust/NNP Belt/NNP)
+
+Compound: 	{<JJ.*><NN.*><NN.*>}
+  (fall/JJS board/NN meeting/NN)
+  (corporate/JJ decision/NN makers/NNS)
+
+Compound:	{<JJ.*><JJ.*><NN.*>}
+

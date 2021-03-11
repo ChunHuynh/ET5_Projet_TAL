@@ -1,0 +1,152 @@
+Pour plus de précision, on change le format colonne en ligne
+Malgré cela, on obtient pas le même nombre de ligne
+- Certains '.' sont comptés comme la fin d'un phrase par nltk (ex: jul. ou R.H.)
+- '61 years old' a du être simplifié en '61' ce qui fausse le tag ADJ contre NUM
+
+-----------------------------------------------------------
+Au format colonne:
+
+Stanford - reference
+
+Word precision: 0.023823704586063133
+Word recall: 0.022048690858980247
+Tag precision: 0.023823704586063133
+Tag recall: 0.022048690858980247
+Word F-measure: 0.02290185600458037
+Tag F-measure: 0.02290185600458037
+
+nltk - reference
+
+Word precision: 0.025511216994242605
+Word recall: 0.023610473128158015
+Tag precision: 0.025511216994242605
+Tag recall: 0.023610473128158015
+Word F-measure: 0.024524070804904815
+Tag F-measure: 0.024524070804904815
+
+-----------------------------------------------------------
+
+Au format ligne:
+
+stanford - reference
+
+Word precision: 0.7049649590366203
+Word recall: 0.7089537423069288
+Tag precision: 0.6216563024380614
+Tag recall: 0.6251737145126067
+Word F-measure: 0.706953724325662
+Tag F-measure: 0.6234100470180648
+
+nltk - reference
+
+Word precision: 0.538906360961753
+Word recall: 0.5272979948381974
+Tag precision: 0.4734706300091306
+Tag recall: 0.46327178876315267
+Word F-measure: 0.5330389844965131
+Tag F-measure: 0.46831568912748983
+
+
+
+II/
+
+1)
+python3.8 src/extractCorpus.py data/ne_reference.txt.conll_update.txt data/ne_test.txt
+
+2)
+Stanford:
+
+cd stanford-ner-2020-11-17
+
+execute le ne recognizer:
+java -mx600m -cp stanford-ner.jar:lib/* edu.stanford.nlp.ie.crf.CRFClassifier -loadClassifier classifiers/english.all.3class.distsim.crf.ser.gz -textFile ../data/ne/ne_test.txt > ../data/ne/ne_test.txt.ne.stanford.temp
+
+formate en colonne:
+python3.8 src/format_NE.py data/ne/ne_test.txt.ne.stanford.temp data/ne/ne_test.txt.ne.stanford
+
+NLTK:
+
+python3.8 src/nltk_ne_recognizer.py data/ne/ne_test.txt data/ne/ne_test.txt.ne.nltk
+
+3)
+python3.8 src/ne_to_conll.py data/ne/ne_test.txt.ne.stanford data/ne/ne_test.txt.ne.stanford.conll
+
+python3 src/ne_to_conll.py data/ne/ne_test.txt.ne.nltk data/ne/ne_test.txt.ne.nltk.conll
+
+4)
+
+--------------------------------------------------------------------
+Format 2 colonnes:
+
+stanford:
+python3.8 src/evaluate.py data/ne/ne_test.txt.ne.stanford.conll data/ne/ne_reference.txt.conll
+
+Word precision: 0.02026221692491061
+Word recall: 0.02026221692491061
+Tag precision: 0.02026221692491061
+Tag recall: 0.02026221692491061
+Word F-measure: 0.02026221692491061
+Tag F-measure: 0.02026221692491061
+
+nltk:
+python3.8 src/evaluate.py data/ne/ne_test.txt.ne.nltk.conll data/ne/ne_reference.txt.conll
+
+Word precision: 0.01956694477552642
+Word recall: 0.01956694477552642
+Tag precision: 0.01956694477552642
+Tag recall: 0.01956694477552642
+Word F-measure: 0.01956694477552642
+Tag F-measure: 0.01956694477552642
+
+--------------------------------------------------------------------
+Format ligne
+On formate tout les fichiers en ligne:
+python3.8 src/column_to_line.py data/ne/ne_test.txt.ne.stanford.conll data/ne/ne_test.txt.ne.stanford.conll.line
+
+python3.8 src/column_to_line.py data/ne/ne_test.txt.ne.nltk.conll data/ne/ne_test.txt.ne.nltk.conll.line
+
+python3.8 src/column_to_line.py data/ne/ne_reference.txt.conll_update.txt data/ne/ne_reference.txt.conll.line
+
+
+
+On enlève les lignes vides du fichier reference
+python3.8 src/noEmptyLine.py data/ne/ne_reference.txt.conll.line data/ne/ne_reference.txt.conll.line.noblank
+
+Stanford - reference:
+python3.8 src/evaluate.py data/ne/ne_test.txt.ne.stanford.conll.line data/ne/ne_reference.txt.conll.line.noblank
+
+Word precision: 0.9871012209531311
+Word recall: 0.9957290425109258
+Tag precision: 0.8961205198897204
+Tag recall: 0.903953118792213
+Word F-measure: 0.9913963607594937
+Tag F-measure: 0.9000197784810127
+
+
+nltk - reference:
+python3.8 src/evaluate.py data/ne/ne_test.txt.ne.nltk.conll.line data/ne/ne_reference.txt.conll.line.noblank
+
+Word precision: 0.9805066297249159
+Word recall: 0.984207389749702
+Tag precision: 0.8818523649317237
+Tag recall: 0.8851807707588399
+Word F-measure: 0.9823535243382572
+Tag F-measure: 0.8835134331317537
+
+--------------------------------------------------------------------
+
+5)
+I'm => stanford (I ' m)
+	=> nltk (I ' m)
+	=> reference (I' m)
+
+52-35 	=> stanford (52 - 35)
+		=> nltk (52-35)
+		=> reference (52-35)
+
+thirty-one	=> stanford (thirty - one)
+			=> nltk (thirty-one)
+			=> reference (thirty-one)
+
+nltk est meilleur sur le découpage (tokenization)
+moins de différence en colonne avec la reference

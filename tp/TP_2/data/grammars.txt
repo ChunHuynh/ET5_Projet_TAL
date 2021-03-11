@@ -1,0 +1,4 @@
+Compound:	{<JJ.*><NN.*>}
+Compound: 	{<NN.*><NN.*>}
+Compound: 	{<JJ.*><NN.*><NN.*>}
+Compound:	{<JJ.*><JJ.*><NN.*>}
