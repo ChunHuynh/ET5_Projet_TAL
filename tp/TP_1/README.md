@@ -1,5 +1,7 @@
-# TP1 Analyse linguistique avec la plateforme Stanford CoreNLP
-
+# TP1 - Analyse linguistique avec la plateforme Stanford CoreNLP
+# Notes
+Les données qui ont servies pour ce TP sont dans le dossier `/data`. Les autres fichiers à la racine n'ont pas servis.  
+Les commandes suivantes sont à exécuter à la racine du tp `../TP_1/`.
 ## I - Installation et évaluation de l’outil de désambiguïsation morphosyntaxique de l’université de Stanford
 
 ### 1. Installation
